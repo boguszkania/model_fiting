@@ -1,9 +1,10 @@
 import matplotlib.pyplot as plt
 import scipy.stats as st
-import statsmodels as sm
 
-data_path = "C:\\Bogusz\\aptiv_data\\tmp_zFAS_obj0.csv"
+# data_path = "C:\\Bogusz\\aptiv_data\\tmp_zFAS_obj0.csv"
+data_path = "C:\\Users\\ljxx5v\\Desktop\\tmp_zFAS_obj0.csv"
 data = []
+
 in_file = open(data_path, "r")
 data_lines = in_file.readlines()
 del data_lines[0]
