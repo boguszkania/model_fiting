@@ -32,18 +32,25 @@ for l in data_lines:
         data.append(curr_value)
 
 print("data loaded")
+np.random.seed(99)
+data = np.random.choice(data, 1000)
+print("data resampled")
+
+
+out_file = open(output_path + "data_for_early_prognosis_second_try.dat", 'w')
+for d in data:
+    out_file.write(str(d)+"\n")
+out_file.close()
+
 
 sample_sizes = [500 + 1000*k for k in range(50)]
 
-print(sample_sizes)
-exit(0)
-
 for this_resampling_size in sample_sizes:
-    bins_count = 200
-    resample_count = 10000
+    bins_count = 1000
+    resample_count = 5000
     resample_size = this_resampling_size
 
-    output_name = "zFAS_obj0_snow_fails_and_lsFit_bootstrap_bins-count=" + str(bins_count) + "_resample-size=" + str(
+    output_name = "zFAS_obj0_snow_fails_bootstrap_from_small_early_sample_second_try_of=" + str(bins_count) + "_resample-size=" + str(
         resample_size) + ".csv"
     out_file = open(output_path + output_name, 'w')
  #   out_file.write(
@@ -55,10 +62,10 @@ for this_resampling_size in sample_sizes:
     for iter_ctr in range(resample_count):
         res_data = np.random.choice(data, size=resample_size)
 
-        bins_edges = np.histogram(res_data, bins=bins_count)[1]
-        bins_values = np.histogram(res_data, bins=bins_count)[0]
-        bins_values_norm = [k / sum(bins_values) for k in bins_values]
-        bins_centers = []
+        # bins_edges = np.histogram(res_data, bins=bins_count)[1]
+        # bins_values = np.histogram(res_data, bins=bins_count)[0]
+        # bins_values_norm = [k / sum(bins_values) for k in bins_values]
+        # bins_centers = []
 
         # for ctr in range(len(bins_edges) - 1):
         #     bins_centers.append(0.5 * (bins_edges[ctr] + bins_edges[ctr + 1]))
@@ -81,10 +88,10 @@ for this_resampling_size in sample_sizes:
 
 # curr_fitted_curve = [johnson_sb_scaled(cx, *curr_params) for cx in bins_centers]
 #
-# # plt.hist(data, zorder=0, bins=bins_count)
-# plt.figure(1, figsize=(12, 5))
+plt.hist(data, zorder=0, bins=bins_count)
+plt.figure(1, figsize=(12, 5))
 # plt.scatter(bins_centers, bins_values, zorder=1, color='red', s=7)
 # plt.plot(bins_centers, curr_fitted_curve)
-# plt.show()
+plt.show()
 
 
